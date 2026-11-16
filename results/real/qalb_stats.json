@@ -1,0 +1,45 @@
+{
+ "tags": 3363,
+ "train": {
+  "chunks": 38432,
+  "words": 1021121,
+  "edited_word_rate": 0.2776,
+  "exact_by_tags": 0.5137,
+  "exact_by_vocab_tags": 0.4135
+ },
+ "dev": {
+  "chunks": 1009,
+  "words": 27120,
+  "edited_word_rate": 0.283,
+  "exact_by_tags": 0.4698,
+  "exact_by_vocab_tags": 0.3816
+ },
+ "cal": {
+  "chunks": 1010,
+  "words": 26617,
+  "edited_word_rate": 0.2837,
+  "exact_by_tags": 0.5069,
+  "exact_by_vocab_tags": 0.4069
+ },
+ "test": {
+  "chunks": 1929,
+  "words": 51285,
+  "edited_word_rate": 0.2906,
+  "exact_by_tags": 0.4826,
+  "exact_by_vocab_tags": 0.3779
+ },
+ "xdom": {
+  "chunks": 148,
+  "words": 5118,
+  "edited_word_rate": 0.2907,
+  "exact_by_tags": 0.7095,
+  "exact_by_vocab_tags": 0.2635
+ },
+ "md_ZAEBUC_cal": {
+  "chunks": 153,
+  "words": 5276,
+  "edited_word_rate": 0.2854,
+  "exact_by_tags": 0.7451,
+  "exact_by_vocab_tags": 0.2222
+ }
+}
