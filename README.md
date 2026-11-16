@@ -1,23 +1,5 @@
 # RACE: distribution-free control of over-correction in Arabic GEC
 
-Code and results for the paper "Distribution-Free Control of Over-Correction in Arabic Grammatical
-Error Correction: A Risk-Invariant, Uncertainty-Routed Correction Service".
-
-## Layout
-
-| Path | Contents |
-|---|---|
-| `code/` | Full pipeline (below) |
-| `code/cs/` | Optional GPU, LLM and multi-node experiments (see `code/cs/README_CS.md`) |
-| `code/third_party/` | Vendored plotting helpers, with their own licence notice |
-| `results/` | CSV/JSON outputs of every experiment |
-
-Source texts are not redistributed. They are the OpenITI corpus (https://github.com/OpenITI,
-release 2023.1.8, https://doi.org/10.5281/zenodo.10007820) and the Tanzil Qur'an text
-(simple-clean, version 1.1, https://tanzil.net/download/). Place them under `data/` as
-described in `code/prep_data.py`. `code/gen_tables.py` writes LaTeX tables and `numbers.tex`
-into the repository root.
-
 ## Pipeline
 
 All steps run on CPU (tested on 2 cores, 7 GB RAM). `pip install -r code/requirements.txt`.
@@ -54,27 +36,8 @@ All steps run on CPU (tested on 2 cores, 7 GB RAM). `pip install -r code/require
    – regenerates tables, `numbers.tex` and figures.
 9. `pdflatex main && bibtex main && pdflatex main && pdflatex main`.
 
-## Notes on scope
 
-* Classical-Arabic errors are synthetic; real human-annotated errors come from QALB-2014 and ZAEBUC (see below).
-* F0.5 is computed from word alignments, not with the official M2 scorer, so values are not directly comparable with published QALB results.
-* No LLM was run; published LLM and QALB values are quoted as reported.
-* Cluster results beyond two cores come from the simulator, not a physical cluster.
-* Seeds: classical RACE and baselines 5; seq2seq 3; ablations 3 per variant; QALB-2014 models 3.
 
-## Data sources
-
-OpenITI corpus, release 2023.1.8 (https://doi.org/10.5281/zenodo.10007820) and Tanzil Qur'an text
-(https://tanzil.net), used under their respective licences. Checkpoints are
-not included in the archive because of size; they are reproduced by steps 3–4.
-
-## Public human-annotated data (QALB-2014, ZAEBUC)
-
-1. Download `data/gec/modeling/{qalb14,zaebuc}/wo_camelira/full/{train,dev,test}.json` from
-   https://github.com/CAMeL-Lab/arabic-gec into `RAW/` as `qalb14_train.json`, `qalb14_dev.json`,
-   `qalb14_test.json`, `zaebuc_dev.json`, `zaebuc_test.json`.
-2. Create a separate root `Q/` with `Q/code` linked to `code/`, copy `data/processed/quran.json`
-   and `checkpoints/mlm.pt` into it, then run `python3 code/qalb_prep.py RAW Q`.
 3. In `Q/`: `python3 code/train.py --model ours --seed S` and `--model pt_tagger --seed S` for S = 1, 2, 3.
 4. In `Q/`: `python3 code/real_eval.py` (Table 4, resplits, bootstrap) and `python3 code/monitor.py real`.
    Copy `Q/results/real_*.csv`, `monitor_real*` and `Q/data/processed/qalb_stats.json` to `results/real/`.
